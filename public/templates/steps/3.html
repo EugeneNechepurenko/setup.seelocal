@@ -1,0 +1,164 @@
+<navigation-top></navigation-top>
+<style>
+    .progress-bar{
+        background-color: #4dc01d !important;
+    }
+    .make_grey{
+        color:#ababab;
+    }
+    .green_text_span{
+        color: #4dc01d !important;
+    }
+</style>
+<section class="step" ng-controller="TabsController">
+    <div class="wrap" ng-controller="UploadingController" ng-init="
+    $root.campaing_logo_img=logo_img;
+    $root.campaing_have_src=have_src;
+    $root.campaing_promotion=promotion;
+    ">
+        <aside>
+            <ul>  
+                <li ng-class="{ active:isSelectedTab(1) }" ng-click="selectTab(1)">Display ads</li>
+                <li ng-class="{ active:isSelectedTab(2),make_grey:(!active && $root.s3_sub.s1 == false) }" ng-click="($root.s3_sub.s1 == true) ? selectTab(2) : ''">Landing Page</li>
+                <li ng-class="{ active:isSelectedTab(3),make_grey:(!active && $root.s3_sub.s2 == false) }" ng-click="($root.s3_sub.s2 == true) ? selectTab(3) : ''">Logo</li>
+                <li ng-class="{ active:isSelectedTab(4),make_grey:(!active && $root.s3_sub.s3 == false) }" ng-click="($root.s3_sub.s3 == true) ? selectTab(4) : ''">Images</li>
+                <li ng-class="{ active:isSelectedTab(5),make_grey:(!active && $root.s3_sub.s4 == false) }" ng-click="($root.s3_sub.s4 == true) ? selectTab(5) : ''">Promotion</li>
+            </ul>
+        </aside>
+        <div class="content">
+            <form action="" novalidate>
+                <div class="form-wrap details" ng-show="isSelectedTab(1)">
+                    <p>We will create a set of <span class="green_text_span">fully optimised display ads</span> for you</p>
+                    <div class="wrap-display">
+                        <div class="col-sm-6">
+                            <img src="../images/display-example.png" alt="display-example">
+                        </div>
+                        <div class="col-sm-6">
+                            <p class>
+                                Your ads will include: <br>
+                                - Your logo <br>
+                                - Images that are relevant to your service or product<br>
+                                - Offer or promotion <br>
+                                - Your target location <br>
+                                - Call to action
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-wrap details" ng-show="isSelectedTab(2)">
+                    <div class="wrap-landing">
+                        <div class="col-sm-6">
+                            <p>We will also create a bespoke <span class="green_text_span">landing page</span> for your business.
+                                It can include information about your business, promotion or offer as well as your contact details.
+                                When potential customers click on your display ads, they will be directed to this page.</p>
+
+                            <p>We track all activity on this page which will be included in your <span class="green_text_span">campaign report</span>.</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <img src="../images/langing-page.png" alt="landing">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-wrap details" ng-show="isSelectedTab(3)">
+                    <p>Upload your company <span class="green_text_span">logo</span> here. Please try to upload a high resolution file (e.g. a .png format). This will ensure a high quality logo appears on your ads and landing page.</p>
+
+<!--	 flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]"
+ flow-files-submitted="$flow.upload()">
+ -->
+
+
+					<div class="upload" flow-init="imagetrings = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='; {singleFile:true}"
+						 flow-files-submitted="submitteds( $files, $event, $flow )"
+                         flow-files-added="processFiles( $files)"
+
+                    >
+                        <!--<input type="text" ng-value="imagetrings">-->
+						<!--<img  id="img_logo_tmp" flow-img="logo_img"/>-->
+                        <div class="drop" flow-drop ng-show="!logo_img && !have_src" ng-class="{'valid_error_select':$root.campaing_logo_msg}">
+                            <span flow-btn><i class="fa fa-plus-circle"></i></span>
+                        </div>
+
+
+
+                        <div class="thumb-wrap" ng-show="logo_img || have_src" >
+                            <div class="thumb col-sm-4">
+                                <p class="thumb-name"><% logo_img_name %></p>
+                                <div class="thumbnail">
+                                    <img flow-img="logo_img" id="img_logo_tmp"/>
+                                </div>
+                                <div class="progress progress-striped" ng-class="{active: $flow.files[0].isUploading()}">
+                                    <div class="progress-bar progress_bar_logo" role="progressbar" ng-style="{width: ($flow.files[0].progress() * 100) + '%'}" aria-valuemax="100" aria-valuemin="0" aria-valuenow="100">
+                                        <span class="sr-only progress_bar_logo_pr" style="position: relative;"><% ($flow.files[0].progress() * 100) || '100'  %>% Complete</span>
+                                    </div>
+                                </div>
+                                <div class="btn-group">
+                                    <span class="btn btn-info" flow-btn style="    background-color: #4dc01d;
+    border-color: #4dc01d;">Change</span>
+                                    <a class="btn btn-danger" ng-click="$flow.files[0].cancel()">
+                                        Remove
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-wrap details" ng-show="isSelectedTab(4)">
+                    <p>Upload relevant <span class="green_text_span">images</span> from your website or marketing materials.
+                        We may use in your display ads or landing page so please upload with this in mind.
+                        To ensure high quality, please also try to upload a high resolution file (e.g. a png fomat). <span class="green_text_span">At least 1 image needs to be uploaded.</span></p>
+<!--  flow-files-submitted="images.flow.upload()" -->
+
+                    <div class="upload" ng-init="get_flow();
+                   $root.campaing_images=$flow.files.length;
+                    " flow-init="" flow-files-submitted="$flow.upload(); someHandlerMethod( $files, $event, $flow )" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" class="ng-scope"
+                         flow-files-added="processFiles_m( $files, $event, $flow )"
+                         
+                         flow-name="obj.flow"
+                         flow-object="existingFlowObject"
+                          flow-file-success="success_1( $file, $message, $flow )"
+                          flow-file-progress="progress_images( $file, $flow )"
+                    >
+                        <div class="drop campaing_images_btn" flow-drop ng-show="!$flow.files.length" ng-class="{'valid_error_select':$root.campaing_images_msg && !$flow.files.length}">
+                            <span flow-btn><i class="fa fa-plus-circle"></i></span>
+                        </div>
+                        <p ng-show="$flow.files.length"><b style="color:#4dc01d;">We recommend adding at least 6 images</b> as this will help us 
+                        <br>reflect the brands look and feel on the landing page.</p>
+                        <span class="btn btn-success" ng-show="$flow.files.length" flow-btn>Add more</span>
+                        <br>
+                        <div class="thumb-wrap" ng-show="$flow.files.length">
+                            <div class="thumb col-sm-3" ng-repeat="file in $flow.files" class="gallery-box ng-scope">
+                                <p class="thumb-name images_array_names"><% file.name | excerptLimitTo: 14 %></p>
+                                <div class="thumbnail" ng-show="$flow.files.length">
+                                    <img flow-img="file" class="images_array">
+                                </div>
+<!--                                 <div><% progress_of_upload*1000 %></div> -->
+                                <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                                        <span class="sr-only ng-binding"  style="position: relative;"><%$flow.files[0].progress() * 100%>% Complete</span>
+                                    </div>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+                                        Remove
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-wrap details promotion" ng-show="isSelectedTab(5)">
+                    <p>Encourage people to click on your ads and sign up on your landing page with an engaging message or promotional offer.
+                        If you are running a Brand Awareness campaign, please enter a call to action for the ad copy and landing page</p>
+
+                    <p>For example, a retailer may offer <span class="green_text_span">20% off all products</span></p>
+                    <textarea class="promo_textarea" placeholder="Enter promotion" ng-model="promotion" rows="1" ng-change="$root.campaing_promotion=promotion" ng-class="{'valid_error_select':$root.campaing_promotion_msg}"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<navigation-bottom></navigation-bottom>

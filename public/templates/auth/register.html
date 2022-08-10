@@ -1,0 +1,167 @@
+<style>
+  body {
+    font-size: 16px;
+  }
+
+  .registration-container .reg-form form button:hover {
+      transform: translateY(3px);
+  }
+  .registration-container .reg-form form button:active {
+      transform: translateY(5px);
+  }
+
+</style>
+<!-- 
+<script src='https://www.google.com/recaptcha/api.js'></script> -->
+<div class="registration-container">
+  <div class="create-account">
+    <h2 class="title">Create an Account</h2>
+    <div class="complete">Complete the forms below to create your Account</div>
+  </div>
+  <div class="reg-form">
+    <form role="form" method="POST" name="registerForm" ng-submit="register()" novalidate>
+       <div class="colums-form">
+          <div class="column-left">
+            <div>
+              <input id="fName" onkeyup="this.setAttribute('value', this.value);" value="" type="text" name="first_name"  ng-model="first_name" ng-class="{'valid_error':error_first_name}" required>
+              <label for="fName">Full Name<span class="green-star">*</span></label>
+            </div>
+            <div>
+              <input id="bName" type="text" onkeyup="this.setAttribute('value', this.value);" value=""  name="company_name" ng-model="company_name" ng-class="{'valid_error':error_company_name}" required>
+              <label for="bName">Business Name<span class="green-star">*</span></label>
+            </div>
+            <div>
+                <p ng-show="phoneInvalid" class="notice_field"><%phoneInvalid%></p>
+              <input type="tel" id="phoneNumber" onkeyup="this.setAttribute('value', this.value);" value="" name="phone_number" ng-model="phone_number" ng-class="{'valid_error':error_phone_number == true}" required>
+              <label for="phoneNumber">Phone<span class="green-star">*</span></label>
+            </div>
+          </div>
+          <div class="column-right">
+             <div>
+                 <p ng-show="emailInvalid" class="notice_field"><%emailInvalid%></p>
+              <input type="email" id="email-reg" onkeyup="this.setAttribute('value', this.value);" value="" name="email" ng-model="email" ng-class="{'valid_error':error_email}" required>
+              <label for="email-reg">Email<span class="green-star">*</span></label>
+            </div>
+             <div>
+              <input name="password" type="password" onkeyup="this.setAttribute('value', this.value);" value=""  id="pass"  name="password" ng-model="password" ng-class="{'valid_error':error_password}" required>
+              <label for="pass">Password<span class="green-star">*</span></label>
+            </div>
+             <div>
+              <input type="password" id="pass2" onkeyup="this.setAttribute('value', this.value);" value="" name="password" name="password_confirmation" ng-model="password_confirmation" ng-class="{'valid_error':error_password_confirmation}" required>
+              <label for="pass2">Confirm Password<span class="green-star">*</span></label>
+                 <p ng-show="matchPassword" class="notice_field"><br><%matchPassword%></p>
+            </div>
+          </div>
+        </div>
+        <!--<div class="g-recaptcha" data-sitekey="6LdEECUTAAAAAOGPYvdpJOJkhAO0oUK1YVxcpMzB"></div>-->
+      <button type="submit"> Submit </button> 
+    </form>
+  </div>
+
+  <div class="need-help">
+    Need help? <span>Call our support number on <a href="tel:01295817638">01295 817 638</a></span>
+  </div>
+
+</div>
+<!--
+<div class="container" ng-controller="RegisterController">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Register</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" name="registerForm" ng-submit="register()" novalidate>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">First Name</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="first_name"
+                                       ng-model="first_name"
+                                       ng-class="{'valid_error':error_first_name}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Last Name</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="last_name"
+                                       ng-model="last_name"
+                                       ng-class="{'valid_error':error_last_name}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Company Name</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="company_name"
+                                       ng-model="company_name"
+                                       ng-class="{'valid_error':error_company_name}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <p ng-show="emailInvalid" class="notice_field"><%emailInvalid%></p>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="email"
+                                       ng-model="email"
+                                       ng-class="{'valid_error':error_email}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <p ng-show="phoneInvalid" class="notice_field"><%phoneInvalid%></p>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Phone Number</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="phone_number"
+                                       ng-model="phone_number"
+                                       ng-class="{'valid_error':error_phone_number}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <p ng-show="matchPassword" class="notice_field"><%matchPassword%></p>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password"
+                                       ng-model="password"
+                                       ng-class="{'valid_error':error_password}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Confirm Password</label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password_confirmation"
+                                       ng-model="password_confirmation"
+                                       ng-class="{'valid_error':error_password_confirmation}"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-user"></i>Register
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ -->

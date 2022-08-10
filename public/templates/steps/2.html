@@ -1,0 +1,219 @@
+<navigation-top></navigation-top>
+
+<style>
+    @media (max-width: 1200px) {
+        .fix_order_cont{display: flex; flex-direction: column;}
+        .fix_order_i1{order: 2;}
+        .fix_order_i2{order: 1;}
+    }
+    .make_grey{
+        color:#ababab
+    }
+    .green_text_span{
+        color: #4dc01d !important;
+    }
+</style>
+
+<section class="step" ng-controller="TabsController">
+    <div class="wrap" ng-controller="DemographicsController" ng-init="
+    $root.campaing_name=name;
+    $root.campaing_phone=phone;
+    $root.campaing_languages=languages;
+    $root.campaing_gender=gender;
+    $root.campaing_age_from=age_from;
+    $root.campaing_age_to=age_to;
+
+    $root.campaing_location=locations;
+    $root.campaing_selected_interests=selectedInterests;
+    $root.campaing_keywords=keywords;
+    ">
+
+        <aside>
+            <ul>
+                <li ng-class="{ active:isSelectedTab(1) }" ng-click="selectTab(1)">Details</li>
+                <li ng-class="{ active:isSelectedTab(2),make_grey:(!active && $root.s2_sub.s1 == false) }" ng-click="($root.s2_sub.s1 == true) ? selectTab(2) : ''">Target Location</li>
+                <li ng-class="{ active:isSelectedTab(3),make_grey:(!active && $root.s2_sub.s2 == false) }" ng-click="($root.s2_sub.s2 == true) ? selectTab(3) : ''">Interests</li>
+                <li ng-class="{ active:isSelectedTab(4),make_grey:(!active && $root.s2_sub.s3 == false) }" ng-click="($root.s2_sub.s3 == true) ? selectTab(4) : ''">Keywords</li>
+                <li ng-class="{ active:isSelectedTab(5),make_grey:(!active && $root.s2_sub.s4 == false) }" ng-click="($root.s2_sub.s4 == true) ? selectTab(5) : ''">Target Websites</li>
+            </ul>
+        </aside>
+        <div class="content">
+            <form name="demographForm" ng-submit="saveData(demographForm)" novalidate>
+                <div class="form-wrap details" ng-show="isSelectedTab(1)">
+                    <p>Enter the <span >name of your campaign</span> & the <span>customer contact number</span> to be included on your landing page.
+					<input type="text" name="name" placeholder="Campaign Name"
+						   ng-model="name" ng-change="$root.campaing_name=name"
+						   ng-class="{'valid_error':$root.campaing_name_msg && demographForm.name.$error}"
+						   ng-style="{'border:1px solid red;':$root.campaing_name_msg && demographForm.name.$error}"
+						   required style="margin-top: 50px">
+					<input type="text" name="phone" placeholder="Phone Number"
+						   ng-model="phone" ng-change="$root.campaing_phone=phone"
+						   ng-class="{'valid_error':$root.campaing_phone_msg && demographForm.phone.$error}"
+						   required>
+
+					<br><br>
+					<p>Your Audience Demographics</p>
+					<br>
+                    <input type="number" name="age_from" placeholder="From Age" ng-model="age_from"  ng-value="$root.from_age" ng-change="$root.campaing_age_from=age_from;$root.from_age=age_from;" min="13" max="65" data-old="18"
+                           ng-class="{'valid_error':$root.campaing_age_from_msg}" class="from_age"
+                           style="    display: block;
+                                                                                                                width: 310px;
+                                                                                                                border: none;
+                                                                                                                border-bottom: 1px solid #c3c3c3;
+                                                                                                                margin-bottom: 20px;
+                                                                                                                padding-left: 3px;
+                                                                                                                outline: none;">
+                                               <!--<input type="text" ng-value="age_from"> <input type="text" ng-value="$root.from_age">-->
+                                              
+                                               
+					<input type="number" name="age_to" placeholder="To Age" ng-model="age_to"  ng-change="$root.campaing_age_to=age_to;$root.to_age=age_to;"  min="13" max="65" data-old="65"
+                           ng-class="{'valid_error':$root.campaing_age_to_msg}" class="to_age"
+                           style="    display: block;
+                                                                                                        width: 310px;
+                                                                                                        border: none;
+                                                                                                        border-bottom: 1px solid #c3c3c3;
+                                                                                                        margin-bottom: 20px;
+                                                                                                        padding-left: 3px;
+                                                                                                        outline: none;">
+
+
+					<select name="gender" ng-model="gender" placeholder="Gender(s)"
+							ng-change="$root.campaing_gender=gender"
+							ng-class="{'valid_error_select':$root.campaing_gender_msg && demographForm.gender.$error}"
+							style="color: #252525" required>
+						<option value="">Gender(s)</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+						<option value="Male & Females">Male & Female</option>
+					</select>
+
+                    <div ng-class="{'valid_error':$root.campaing_languages_msg && demographForm.languages.$error}">
+                        <angucomplete id="ex1" placeholder="Languages" pause="100" selectedobject="languages" localdata="countries" searchfields="name" titlefield="name" minlength="1" matchclass="highlight" />
+                    </div>
+
+					<select name="rel_status" ng-model="rel_status" value="all" placeholder="Single & Married">
+						<!--<option value="">Relationship Status</option>-->
+						<option value="single">Single</option>
+						<option value="married">Married</option>
+						<option value="all" selected="selected">Single & Married</option>
+					</select>
+
+					<br>
+                    <br>
+					<p>Enter the most likely job titles of your target audience</p>
+					<br>
+
+                    <style>
+                        .jb_target_cont{
+                            display: flex;
+                            flex-wrap: wrap;
+                            margin-bottom: 20px;
+                        }
+                        .jb_target_cont_input{
+                            margin-bottom: 0 !important;
+                        }
+                        .jb_target_cont_remove{}
+                        @media (min-width: 1201px) {
+                            .jb_target_cont_remove{margin-left: 20px;}
+                        }
+                    </style>
+
+                    <div ng-repeat="(key,jb_target_arr) in jb_target_arr" class="jb_target_cont">
+                        <input type="text" name="jb_target" placeholder="Job Title Targeting" ng-model="jb_target_arr.name" class="jb_target_cont_input">
+                        <div class="link remove jb_target_cont_remove" ng-click="remove_jb_target(key)" ng-show="key">Remove</div>
+                    </div>
+                    <div class="link" ng-click="add_jb_target()">Add Job Title</div>
+					<br>
+
+                </div>
+                <div class="form-wrap details" ng-show="isSelectedTab(2)">
+
+                    <p>Enter the target <span class="green_text_span">locations</span> of your campaign</p>
+                    <div class="location" ng-repeat="(key, location) in locations">
+
+
+
+                        <div class="fix_order_cont">
+                            <input type="text" id="location_<%key%>" ng-focus="autocomplete(key)" placeholder="Location" name="location_location"
+                                   ng-model="location.location"
+                                   ng-change="$root.campaing_location[key].location=location.location"
+                                   ng-class="{'valid_error':$root.campaing_location[key].location_msg}" style="display: inline-block" class="fix_order_i1">
+                            <div class="link remove fix_order_i2" ng-click="removeLocation(key)" ng-show="key">Remove</div>
+                        </div>
+
+
+                        <input type="text" id="locality_<%key%>" placeholder="Target Towns/Cities" name="location_cities"
+                        ng-model="location.cities"
+                               ng-change="$root.campaing_location[key].cities=location.cities"
+                               ng-class="{'valid_error':$root.campaing_location[key].cities_msg && demographForm.location_cities.$error}">
+
+
+                        <input type="text" id="postal_code_<%key%>" placeholder="Postcode(s) optional"  name="location_postcode"
+                        ng-model="location.postcode">
+
+                        <select name="location_radius" id="" 
+                        ng-model="location.radius"     
+                         ng-change="$root.campaing_location[key].radius=location.radius"
+                           ng-class="{'valid_error_select':$root.campaing_location[key].radius_msg && demographForm.location_radius.$error}"
+                           required>
+                            <option value="">Mile Radius</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                    <div class="link" ng-click="addLocation()">Add more locations</div>
+                </div>
+
+                
+                
+                
+                
+                <div class="form-wrap details" ng-show="isSelectedTab(3)">
+                    <span class="green_text_span">What are the key interests of your target audience?</span> Search for any words, phrases or topics that are relevant to your business/audience and add them to your campaign. <span class="green_text_span">At least 3 interests need to be added.</span></p>
+                    <input type="text" placeholder="Search" ng-model="searchInterest">
+                    <div class="wrap-interests">
+                        <div class="col-sm-6">
+                            <p>Select to add</p>
+                            <ul class="interests">
+                                <li ng-repeat="(key, interest) in (interests | filter: searchInterest)" style="display: flex;justify-content: space-between;"><span><% interest.key %> <% interest.name %></span><span ng-click="selectInterest(key)"><i class="fa fa-plus-circle"></i></span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>Selected Interests</p>
+                            <ul class="interests selected"  ng-class="{'valid_error_select':$root.campaing_selected_interests_msg}">
+                                <li ng-repeat="(key, interest) in selectedInterests" style="display: flex;justify-content: space-between;"><span><% interest.key %> <% interest.name %></span><span ng-click="unselectInterest(key)"><i class="fa fa-minus-circle"></i></span></li>
+                            </ul>
+                        </div>
+                        <div class="link" ng-click="selectAllInterests()">Add all</div>
+                    </div>
+                </div>
+
+                
+                
+                <div class="form-wrap details" ng-show="isSelectedTab(4)">
+                    <p>Type in any <span class="green_text_span">keywords</span> that are relevant to your business, product or service. Try to think of any words/phrases that your target audience may be searching for. <span class="green_text_span">At least 3 keywords need to be added.</span></p>
+                    <input type="text" placeholder="Keyword" ng-repeat="keyword in keywords" ng-model="keyword.name" ng-class="{'valid_error_select':
+                    ($root.campaing_keywords_msg_0 && $index == 0) || 
+                    ($root.campaing_keywords_msg_1 && $index == 1) || 
+                    ($root.campaing_keywords_msg_2 && $index == 2)}">
+                    <div class="link" ng-click="addKeyword()">Add more</div>
+                </div>
+
+                
+                
+
+                <div class="form-wrap details" ng-show="isSelectedTab(5)">
+                    <p>Highlight any relevant websites on which you would ideally like your ads to appear. Please note that our network does not include all websites, so this cannot be guaranteed.</p>
+                    <input type="text" placeholder="Website URL" ng-repeat="website in websites" ng-model="website.name">
+                    <div class="link" ng-click="addWebsite()">Add more</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<navigation-bottom></navigation-bottom>

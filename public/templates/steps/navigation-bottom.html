@@ -1,0 +1,9 @@
+<section class="buttons">
+    <div ng-hide="step == 1" class="prev pull-left"><span class="go_ajax_action_step" ng-click="saveData(+step - 1)"><i class="fa fa-angle-left" aria-hidden="true"></i>Back</span></div>
+    <div ng-hide="step == 5" class="next pull-right"><span class="go_ajax_action_step" ng-click="saveData(+step + 1)">Next Step<i class="fa fa-angle-right" aria-hidden="true"></i></span></div>
+    <div ng-show="step == 5" class="next pull-right">
+		<div class="confirm-button" ng-click="pay_btn()">Confirm & Pay</div>
+		<div class="confirm_button_pay_msg" style="display: none;"></div>
+	</div>
+	
+</section>

@@ -1,0 +1,249 @@
+<navigation-top></navigation-top>
+<style>
+.valid_terms{
+    color:red !important;
+}
+.black_overlay{
+    display: none;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+}
+.white_content {
+    display: none;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    max-width: 640px;
+    height: 265px;
+    padding: 16px;
+    background-color: #fff;
+    z-index:1002;
+    overflow: auto;
+    color:red;
+    text-align:center;
+}
+.video-close {
+    position: absolute;
+    top: -2px;
+    right: 7px;
+}
+</style>
+<div id="light" class="pop-video white_content">
+    <div class="video-close"><span>x</span></div>
+    sample content popup
+</div>
+
+
+<section class="step" ng-controller="TabsController">
+    <div class="wrap" ng-controller="OverviewController">
+        <aside>
+            <ul>
+                <li ng-class="{ active:isSelectedTab(1) }" ng-click="selectTab(1)">Campaign Overview</li>
+                <li ng-class="{ active:isSelectedTab(2) }" ng-click="selectTab(2)">Demographics and Targeting</li>
+                <li ng-class="{ active:isSelectedTab(3) }" ng-click="selectTab(3)">Images</li>
+                <li ng-class="{ active:isSelectedTab(4) }" ng-click="selectTab(4)">Pay now</li>
+            </ul>
+        </aside>
+        <div class="content">
+            <form action="" ng-submit="confirm()" novalidate>
+                <div class="form-wrap details" ng-show="isSelectedTab(1)">
+                    <ul class="overview">
+                        <li ng-repeat="data in overview">
+                            <span class="title"><% data.title %> |</span> <span class="value"><% data.value %></span> <a class="link pull-right" href="<% data.location %>">Edit</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-wrap details" ng-show="isSelectedTab(2)">
+                        <ul class="overview">
+                        <li><span class="title">Location(s)&nbsp;&nbsp;|</span> <span class="value"><ul><li ng-repeat="location in targeting.locations"><% location.location %></li></ul></span><a class="link pull-right" href="/step/2?tab=2">Edit</a></li>
+                        <li><span class="title">Demographics&nbsp;|</span> <span class="value"><% targeting.gender %> <% targeting.age %></span><a class="link pull-right" href="/step/2?tab=1">Edit</a></li>
+                        <li><span class="title">Relationship Status&nbsp;|</span> <span class="value"><% rel_stat %></span><a class="link pull-right" href="/step/2?tab=1">Edit</a></li>
+<!--                         <li><span class="title">Job Title Targeting&nbsp;|</span> <span class="value"><% jb_target %></span><a class="link pull-right" href="/step/2?tab=1">Edit</a></li> -->
+                        <li><span class="title">Job Title Targeting&nbsp;|</span> <span class="value"><% targeting.jb_target_arr %></span><a class="link pull-right" href="/step/2?tab=1">Edit</a></li>
+                        <li><span class="title">Languages&nbsp;|</span> <span class="value"><% languages %></span><a class="link pull-right" href="/step/2?tab=1">Edit</a></li>
+                        <li><span class="title">Interests&nbsp;|</span> <span class="value"><%  targeting.interests %></span><a class="link pull-right" href="/step/2?tab=3">Edit</a></li>
+                        <li><span class="title">Keywords&nbsp;|</span> <span class="value"><% targeting.keywords %></span><a class="link pull-right" href="/step/2?tab=4">Edit</a></li>
+                        <li><span class="title">Target &nbsp;Websites&nbsp;|</span> <span class="value"><ul><li ng-repeat="website in targeting.websites"><% website.name %></li></ul></span><a class="link pull-right" href="/step/2?tab=5">Edit</a></li>
+                    </ul>
+
+
+                   <!--  <ul class="overview">
+                        <li><span class="title">Location(s)&nbsp;&nbsp;|</span> <span class="value"><ul><li ng-repeat="location in targeting.locations"><% location.location %></li></ul></span><a class="link pull-right" href="/step/2?tab=2">Edit</a></li>
+                        <li><span class="title">Demographics&nbsp;|</span> <span class="value"><% targeting.gender %>, <% targeting.age %></span><a class="link pull-right" href="/step/2?tab=3">Edit</a></li>
+                        <li><span class="title">Interests&nbsp;|</span> <span class="value"><%  targeting.interests %></span><a class="link pull-right" href="/step/2?tab=4">Edit</a></li>
+                        <li><span class="title">Keywords&nbsp;|</span> <span class="value"><% targeting.keywords %></span><a class="link pull-right" href="/step/2?tab=5">Edit</a></li>
+                        <li><span class="title">Target &nbsp;Websites&nbsp;|</span> <span class="value"><ul><li ng-repeat="website in targeting.websites"><% website.name %></li></ul></span><a class="link pull-right" href="/step/2?tab=6">Edit</a></li>
+                    </ul> -->
+                </div>
+                <div class="form-wrap details" ng-show="isSelectedTab(3)" style="display:flex;flex-direction:column;">
+                    <div>
+                        <p>Logo</p>
+                        <a class="link pull-right" href="/step/3?tab=3">Edit</a>
+
+                        <div class="thumb-wrap">
+                            <div class="thumb col-sm-3">
+                                <div flow-init class="thumbnail">
+                                    <img id="img_logo_tmp"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Images</p>
+
+                        <div class="thumb-wrap images_arr_res">
+                          <!--   <div class="thumb col-sm-3" ng-repeat="image in images">
+                                <div class="thumbnail">
+                                    <img ng-src="image"/>
+                                </div>
+                            </div> -->
+                        </div>
+
+
+
+
+
+                      <div style="display: none;" class="upload" ng-init="get_flow();" flow-init="" flow-files-submitted="$flow.upload(); someHandlerMethod( $files, $event, $flow )" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" class="ng-scope"
+                         flow-files-added="processFiles_m( $files, $event, $flow )"
+                         
+                         flow-name="obj.flow"
+                         flow-object="existingFlowObject"
+                          flow-file-success="success_1( $file, $message, $flow )"
+                    >
+                        <div class="drop" flow-drop ng-show="!$flow.files.length">
+                            <span flow-btn><i class="fa fa-plus-circle"></i></span>
+                        </div>
+                        <span class="btn btn-success" ng-show="$flow.files.length" flow-btn>Add more</span>
+                        <br>
+                        <div class="thumb-wrap" ng-show="$flow.files.length">
+                            <div class="thumb col-sm-3" ng-repeat="file in $flow.files" class="gallery-box ng-scope">
+                                <p class="thumb-name images_array_names"><% file.name | excerptLimitTo: 14 %></p>
+                                <div class="thumbnail" ng-show="$flow.files.length">
+                                    <img flow-img="file" class="images_array">
+                                </div>
+                                <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}" style="width: 100%;">
+                                        <span class="sr-only ng-binding">1% Complete</span>
+                                    </div>
+                                </div>
+                                <div class="btn-group">
+                                    <a class="btn btn-xs btn-danger" ng-click="file.cancel()">
+                                        Remove
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <a class="link pull-right" href="/step/3?tab=4">Edit</a>
+                    </div>
+                </div>
+
+
+
+                <div class="form-wrap details payment" ng-show="isSelectedTab(4)">
+                    <div ng-show="user_id == 145 || user_id == 51" style="    display: flex; justify-content: center;"><div style="
+                                    background-color: #4dc01d;
+                                    border-radius: 25px;
+                                    padding: 10px;
+                                    margin: auto auto 5px auto;
+                                    color: white;
+                                    cursor: pointer;
+                                    font-size: 16px;
+                                    font-family: 'LatoRegular', sans-serif;" ng-click="skip_pay()">Already received payment method</div></div>
+                    <p>Personal information</p>
+
+
+                    <div class="row">
+                        <input class="fullName_skip" type="text" ng-model="fullName" placeholder="Full name" ng-class="{'valid_error':fullName_msg}">
+                    </div>
+                    <div class="row">
+                         <div class="col-sm-6">
+                             <input class="houseNumber_skip" type="text" placeholder="House name/number" ng-model="houseNumber" ng-class="{'valid_error':houseNumber_msg}">
+                           
+                             <input class="city_skip" type="text" placeholder="Town/city" ng-model="city" ng-class="{'valid_error':city_msg}">
+                             <input class="postcode_skip" type="text" placeholder="Post code" ng-model="postcode" ng-class="{'valid_error':postcode_msg}">
+                         </div>   
+                         <div class="col-sm-6">
+                             <input class="street_skip" type="text" placeholder="Second line of address" ng-model="street" ng-class="{'valid_error':street_msg}">
+                             <input class="country_skip" type="text" placeholder="Country" ng-model="country" ng-class="{'valid_error':country_msg}">
+                         </div>
+                    </div>
+                    <p>Card Information</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <select class="cardType_skip" ng-model="cardType" ng-class="{'valid_error_select':cardType_msg}">
+                                <option value="">Card type</option>
+                                <option value="MasterCard">MasterCard</option>
+                                <option value="Visa">Visa</option>
+                            </select>
+                            <input class="expiryDate_skip"  type="text" ng-model="expiryDate" placeholder="Expiry Date (mm/year)" ng-class="{'valid_error':expiryDate_msg}" maxlength="7" class="paymentDate_card">
+
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="cardNumber_skip"  type="text" placeholder="Card number" ng-model="cardNumber" maxlength="16" ng-class="{'valid_error':cardNumber_msg}">
+                            <input class="securityCode_skip"  type="text" placeholder="Security code" ng-model="securityCode" ng-class="{'valid_error':securityCode_msg}">
+                        </div>
+                    </div>
+
+                    <p>Coupons</p>
+                    <div class="row">
+                        <input type="text" ng-model="coupon_code" placeholder="Coupon Code">
+                    </div>
+
+
+                    <div class="row"  ng-class="{'valid_terms':terms_cond_msg}"><input class="terms_cond_skip" type="checkbox" ng-model="terms_cond"> I accepted <a class="link" ng-class="{'valid_terms':terms_cond_msg}">terms & conditions</a></div>
+                    <div class="row">
+                        <img style="height:48px;" src="images/cards/visa.png">
+                        <img style="height:48px;" src="images/cards/mastercard.png">
+                        <img style="height:48px;" src="images/cards/maestro.png">
+                        <img style="height:48px;" src="images/cards/paypal.png">
+                    </div>
+                    <!--<div class="confirm_button_pay_msg" style="display: none;"></div>-->
+<!--                     <div class="confirm-button" ng-click="confirm()">Confirm & Pay</div> -->
+                </a>
+                </div>
+           
+
+
+
+            </form>
+        </div>
+    </div>
+</section>
+<navigation-bottom></navigation-bottom>

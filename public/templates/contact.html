@@ -1,0 +1,381 @@
+<style>
+	main .row {
+		 margin: 0;
+	}
+	@font-face {
+		font-family: "LatoRegular";
+		src: url("../fonts/Lato-Regular.eot");
+		src: url("../fonts/Lato-Regular.eot?#iefix")format("embedded-opentype"),
+		url("../fonts/Lato-Regular.woff") format("woff"),
+		url("../fonts/Lato-Regular.ttf") format("truetype");
+		font-style: normal;
+		font-weight: normal;
+	}
+	@font-face {
+		font-family: "LatoLight";
+		src: url("../fonts/LatoLight.eot");
+		src: url("../fonts/Lato-Light.eot?#iefix")format("embedded-opentype"),
+		url("../fonts/Lato-Light.woff") format("woff"),
+		url("../fonts/Lato-Light.ttf") format("truetype");
+		font-style: normal;
+		font-weight: normal;
+	}
+	@font-face {
+		font-family: "LatoMedium";
+		src: url("../fonts/Lato-Medium.ttf") format("truetype");
+		font-style: normal;
+		font-weight: normal;
+	}
+	@font-face {
+		font-family: "LatoSemibold";
+		src: url("../fonts/Lato-Semibold.ttf") format("truetype");
+		font-style: normal;
+		font-weight: normal;
+	}
+
+
+	.container-contacts .center-main-block {
+		font-size: 100%;
+		width: 90%;
+		max-width: 1020px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.container-contacts .center-main-block .title .image {
+		margin: 6% auto 0 auto;
+		width: 10%;
+		min-width: 60px;
+	}
+	.container-contacts .center-main-block .title .image img {
+		max-width: 100%;
+	}
+	.container-contacts .center-main-block .title h2 {
+		font-size: 1.88em;
+		color: #252525;
+		font-family: "LatoRegular", sans-serif;
+		width: 50%;
+		margin: 5.6% auto 5%;
+		line-height: 1.17em;
+	}
+	.container-contacts .center-main-block .text-contacts {
+		font-size: 1.5em;
+		font-family: "LatoLight", sans-serif;
+		color: #252525;
+		margin: 0 auto;
+		width: 80%;
+		line-height: 1.5em;
+		margin-bottom: 4%;
+	}
+	.container-contacts .center-main-block .form-contacts {
+		width: 72%;
+		margin: 0 auto;
+	}
+	.container-contacts .center-main-block .form-contacts form {
+		display: -webkit-flex;
+		display: flex;
+		-webkit-flex-wrap: wrap;
+		flex-wrap: wrap;
+		-webkit-justify-content: space-between;
+		justify-content: space-between;
+		margin-top: 9.5%;
+	}
+	.container-contacts .center-main-block .form-contacts form p {
+		width: 44.5%;
+		margin-bottom: 3.9%;
+	}
+	.container-contacts .center-main-block .form-contacts form p input[type="text"] {
+		font-size: 1.125em;
+		font-family: "LatoLight", sans-serif;
+		border: none;
+		border-bottom: 1px solid #c3c3c3;
+		max-width: 308px;
+		width: 100%;
+	}
+	.container-contacts .center-main-block .form-contacts form p input[type="text"]:focus {
+		border: none;
+		outline: none;
+		box-shadow: none;
+		border-bottom: 1px solid gray;
+	}
+	.container-contacts .center-main-block .form-contacts form p input[type="email"] {
+		font-size: 1.125em;
+		font-family: "LatoLight", sans-serif;
+		border: none;
+		border-bottom: 1px solid #c3c3c3;
+		max-width: 308px;
+		width: 100%;
+	}
+	.container-contacts .center-main-block .form-contacts form p input[type="email"]:focus {
+		border: none;
+		outline: none;
+		box-shadow: none;
+		border-bottom: 1px solid gray;
+	}
+	.container-contacts .center-main-block .form-contacts form p.button {
+		margin: 0 auto;
+	}
+	.container-contacts .center-main-block .form-contacts form p.button button {
+		max-width: 170px;
+		min-width: 140px;
+		width: 55%;
+		padding: 3.9%;
+		cursor: pointer;
+		border: 1px solid #44ac18;
+		color: white;
+		font-family: "LatoSemibold", sans-serif;
+		font-size: 1em;
+		background: #4dc01d;
+		border-radius: 24px;
+		margin: 6% 0;
+		position: relative;
+	}
+	.container-contacts .center-main-block .form-contacts form p.button button:after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		display: block;
+		top: 0;
+		left: 0;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 20%, rgba(255, 255, 255, 0) 80%);
+	}
+	.container-contacts .center-main-block .contact-data {
+		display: -webkit-flex;
+		display: flex;
+		-webkit-justify-content: space-between;
+		justify-content: space-between;
+		font-size: 1.5em;
+		width: 85%;
+		color: #191919;
+		max-width: 1020px;
+		margin: 7.4% auto 7.4% auto;
+	}
+	.container-contacts .center-main-block .contact-data .phone,
+	.container-contacts .center-main-block .contact-data .email {
+		font-family: "LatoLight", sans-serif;
+		position: relative;
+	}
+	.container-contacts .center-main-block .contact-data .phone .green,
+	.container-contacts .center-main-block .contact-data .email .green {
+		background-color: #4DC01D;
+		width: 48px;
+		display: inline-block;
+		position: absolute;
+		height: 48px;
+		border-radius: 50%;
+		background-repeat: no-repeat;
+		left: 0;
+		background-position: center;
+	}
+	.container-contacts .center-main-block .contact-data .phone .info,
+	.container-contacts .center-main-block .contact-data .email .info {
+		text-decoration: none;
+		color: #191919;
+	}
+	.container-contacts .center-main-block .contact-data .phone .green {
+		background-image: url("../images/phone.png");
+		top: -15%;
+	}
+	.container-contacts .center-main-block .contact-data .phone .info {
+		margin-left: 65px;
+		letter-spacing: -0.6px;
+	}
+	.container-contacts .center-main-block .contact-data .email .green {
+		background-image: url("../images/letter.png");
+		top: -15%;
+	}
+	.container-contacts .center-main-block .contact-data .email .info {
+		margin-left: 69px;
+	}
+	.container-contacts .center-main-block .contact-data .text-contact-data {
+		font-family: "LatoMedium", sans-serif;
+	}
+		/*----------fonts-----------*/
+	@media (min-width: 1600px) {
+		.container-contacts .center-main-block {
+			font-size: 105%;
+		}
+	}
+	@media (max-width: 1200px) {
+		.container-contacts .center-main-block {
+			font-size: 90%;
+		}
+	}
+	@media (max-width: 986px) {
+		.container-contacts .center-main-block {
+			font-size: 85%;
+		}
+	}
+	@media (max-width: 769px) {
+		.container-contacts .center-main-block {
+			font-size: 75%;
+		}
+	}
+	@media (max-width: 700px) {
+		.container-contacts .center-main-block {
+			font-size: 70%;
+		}
+	}
+	@media (max-width: 480px) {
+		.container-contacts .center-main-block {
+			font-size: 65%;
+		}
+	}
+	@media (max-width: 320px) {
+		.container-contacts .center-main-block {
+			font-size: 60%;
+		}
+	}
+
+	/*-----Main container-------*/
+	@media (max-width: 986px) {
+		.container-contacts .center-main-block {
+			width: 100%;
+		}
+	}
+	@media (max-width: 870px) {
+		.container-contacts .center-main-block {
+			width: 100%;
+		}
+	}
+
+	/*-----title & text-contacts*/
+	@media (max-width: 480px) {
+		.container-contacts .center-main-block .title h2 {
+			width: 85%;
+		}
+		.container-contacts .center-main-block .text-contacts {
+			width: 95%;
+		}
+		.container-contacts .center-main-block .form-contacts {
+			width: 90%;
+		}
+		.container-contacts .center-main-block .form-contacts form p {
+			width: 47.5%;
+		}
+	}
+	/*----------form----------*/
+	@media (max-width: 375px) {
+		.container-contacts .center-main-block .form-contacts form {
+			-webkit-flex-direction: column;
+			flex-direction: column;
+		}
+		.container-contacts .center-main-block .form-contacts form p {
+			width: 85%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 15px;
+		}
+	}
+	/*-----contacts-data--------*/
+	@media (max-width: 1100px) {
+		.container-contacts .center-main-block .contact-data {
+			width: 94%;
+		}
+		.container-contacts .center-main-block .contact-data .phone .info, .container-contacts .center-main-block .contact-data .email .info {
+			margin-left: 53px;
+		}
+	}
+	@media (max-width: 769px) {
+		.container-contacts .center-main-block .contact-data .email .green, .container-contacts .center-main-block .contact-data .phone .green {
+			width: 35px;
+			height: 35px;
+			background-size: 50%;
+		}
+		.container-contacts .center-main-block .contact-data .phone .info, .container-contacts .center-main-block .contact-data .email .info {
+			margin-left: 40px;
+		}
+		.container-contacts .center-main-block .contact-data .email .green, .container-contacts .center-main-block .contact-data .phone .green {
+			top: -36%;
+		}
+	}
+	@media (max-width: 670px) {
+		.container-contacts .center-main-block .contact-data {
+			-webkit-flex-wrap: wrap;
+			flex-wrap: wrap;
+			width: 100%;
+			-webkit-justify-content: center;
+			justify-content: center;
+		}
+		.container-contacts .center-main-block .contact-data .text-contact-data {
+			width: 100%;
+		}
+		.container-contacts .center-main-block .contact-data .phone {
+			margin-right: 25px;
+		}
+		.container-contacts .center-main-block .contact-data .phone, .container-contacts .center-main-block .contact-data .email {
+			margin-top: 4%;
+		}
+		.container-contacts .center-main-block .contact-data .email .info, .container-contacts .center-main-block .contact-data .phone .info {
+			display: block;
+			text-align: left;
+		}
+	}
+	@media (max-width: 410px) {
+		.container-contacts .center-main-block .contact-data .email .green, .container-contacts .center-main-block .contact-data .phone .green {
+			width: 25px;
+			height: 25px;
+		}
+		.container-contacts .center-main-block .contact-data .phone .info, .container-contacts .center-main-block .contact-data .email .info {
+			margin-left: 30px;
+		}
+	}
+	@media (max-width: 320px) {
+		.container-contacts .center-main-block .contact-data .phone, .container-contacts .center-main-block .contact-data .email {
+			margin-top: 5%;
+		}
+	}
+
+	.empty_field{
+		border-bottom: 1px solid red !important;
+	}
+	.container-contacts .center-main-block .form-contacts form p.button button:hover {
+		transform: translateY(3px);
+	}
+	.container-contacts .center-main-block .form-contacts form p.button button:active {
+		transform: translateY(5px);
+	}
+</style>
+<div class="container-contacts">
+	<div class="center-main-block">
+		<div class="title">
+			<div class="image">
+				<img src="images/shapes.png" alt="shape">
+			</div>
+			<h2>
+				Do you need to speak to a member of our team?
+			</h2>
+		</div>
+		<div class="text-contacts">
+			If you are experiencing any issues, or would just like to discuss your
+			campaign with one of our experts, please get in touch using the contact
+			form or contact details below
+		</div>
+		<div class="form-contacts">
+			<form ng-submit="submit()">
+				<p><input type="text" ng-model="name" ng-class="{empty_field: name_error == true}" placeholder="Name*"></p>
+				<p><input type="text" ng-model="client_id" placeholder="Client ID"></p>
+				<p><input type="email" ng-model="email" ng-class="{empty_field: email_error == true}" placeholder="Email*"></p>
+				<p><input type="text" ng-model="message" ng-class="{empty_field: message_error == true}" placeholder="Message*"></p>
+				<p><input type="text" ng-model="phone" ng-class="{empty_field: phone_error == true}" placeholder="Phone*"></p>
+				<p><input type="text" ng-model="text"></p>
+				<p class="button">
+					<button type="submit">
+						<span>Submit</span>
+					</button>
+				</p>
+			</form>
+		</div>
+		<div class="contact-data">
+			<div class="text-contact-data">Get in touch directly</div>
+			<div class="phone">
+				<span class="green">  </span>
+				<a href="tel:01295817638" class="info">01295 817 638</a>
+			</div>
+			<div class="email">
+				<span class="green">  </span>
+				<a href="mailto:admin@seelocal.co.uk" class="info">admin@seelocal.co.uk</a>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,406 @@
+<navigation-top></navigation-top>
+<section class="date-step" ng-controller="DatesController" ng-init="
+    $root.campaing_name=name;
+    $root.campaing_phone=phone;
+    $root.campaing_languages=languages;
+    $root.campaing_gender=gender;
+
+    $root.campaing_location=locations;
+    $root.campaing_selected_interests=selectedInterests;
+    $root.campaing_keywords=keywords;
+    ">
+
+    <style>
+        td.no_work_days a {
+            background: #D2D2D2 !important;
+        }
+        .cont div#datepicker table.ui-datepicker-calendar a.ui-state-active {
+            background: #FFA200 !important;
+        }
+        .cont div#datepicker.green-picker table.ui-datepicker-calendar a.ui-state-active {
+            background: #4DC01D !important;
+        }
+        .rangeslider, .month_range_input {
+            max-width: 380px;
+            margin: auto auto 20px auto;
+        }
+        .rangeslider--horizontal .rangeslider__handle {
+            top: -5px;
+            touch-action: pan-y;
+            -ms-touch-action: pan-y;
+        }
+
+        .rangeslider__handle {
+            border-radius: 22px;
+            min-width: 50px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .rangeslider__handle {
+            width: 20px;
+            height: 30px;
+        }
+
+        .rangeslider__handle:after {
+            background: 0;
+        }
+        .rangeslider{
+            opacity: 1;
+            margin-left: 20px;
+            margin-right: 0;
+            margin-bottom: 3px;
+        }
+        .period_description p{
+            letter-spacing: .02em;
+            text-align: center;
+            margin: 0 0 20px;
+        }
+        .period_description {
+            margin: auto 10px auto 10px;
+        }
+    </style>
+
+
+    <div class="wrap">
+        <!-- <h3 class="title-wrap">How long do you want to run your campaign for?</h3> -->
+
+        <div class="choose-period">
+            <div class="title-period title-wrap">Please select a campaign option</div>
+            <div class="cont">
+                
+                
+<!--        <div class="choose-period">
+            <ul>
+                <li ng-repeat="period in periods" ng-click="setPeriod($index)" ng-class="{active: isSelectedPeriod($index)}"><% period %></li>
+            </ul>
+        </div>-->
+                
+                <div class="block">
+                    <a href="#" class="time orange" ng-click="setPeriod(0)">Single Campaigns</a>
+                    <div class="desc">Great for events, limited time offers, instant brand awareness
+                        & more 
+                    </div>
+                </div>
+                
+                
+                 <div class="block">
+                    <a href="#" class="time blue" ng-click="setPeriod(1)">Subscription Campaigns</a>
+                    <div class="desc">Ideal for generating consistent
+                            sales & brand awareness, great
+                            value
+                    </div>
+                </div>
+                
+                
+                 <div class="block">
+                    <a href="#" class="time green" ng-click="setPeriod(2)">Other Campaigns</a>
+                    <div class="desc">We also offer beacon, self-serve
+& brand awareness campaigns
+                    </div>
+                </div>
+            
+            
+            
+            
+            </div>
+        </div>
+
+         <div class="choose-campaign">
+              <div class="title-campaign title-wrap">Please select a campaign price & package</div>
+              
+              
+              
+              <form action="" class="form-table" ng-show="selectedPeriod == 0">
+                  <table class="table-campaign" ng-class="{'valid_table':$root.campaing_periode_msg}">
+                    <thead>
+                     <tr>
+                         <th></th>
+                         <th class="first">starter</th>
+                         <th class="second">advanced</th>
+                         <th class="third">expert</th>
+                         <th class="fourth">VIP</th>
+                     </tr>                      
+                     <tr>
+                         <th></th>
+                         <th class="first">£299</th>
+                         <th class="second">£499</th>
+                         <th class="third">£899</th>
+                         <th class="fourth">£1,749</th>
+                     </tr> 
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td class="silver">Ads shown</td>
+                             <td class="ebebeb">25,000</td>
+                             <td class="silver">45,000</td>
+                             <td class="ebebeb">85,000</td>
+                             <td class="silver">180,000</td>
+                         </tr>
+                         <tr>
+                             <td class="grey">Clicks</td>
+                             <td>250</td>
+                             <td class="grey">450</td>
+                             <td>850</td>
+                             <td class="grey">1,800</td>
+                         </tr>
+                         <tr>
+                             <td class="silver">Retargeting</td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="silver im-bg"></td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="silver im-bg"></td>
+                         </tr>
+                         <tr>
+                             <td class="grey">Landing page</td>
+                             <td class="im-bg"></td>
+                             <td class="grey im-bg"></td>
+                             <td class="im-bg"></td>
+                             <td class='grey im-bg'></td>
+                         </tr>
+                         <tr>
+                             <td class="silver">Ad design</td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="silver im-bg"></td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="silver im-bg"></td>
+                         </tr>
+                         <tr>
+                             <td class="grey">Campaign guard</td>
+                             <td class="im-bg"></td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="im-bg"></td>
+                             <td class="ebebeb im-bg"></td>
+                         </tr>
+                         <tr>
+                             <td></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_1" ng-click="selectPlan(1, 0)" ng-checked="isSelectedPlan(1)"><label for="r_1"><span></span></label></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_2" ng-click="selectPlan(2, 1)" ng-checked="isSelectedPlan(2)"><label for="r_2"><span></span></label></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_3" ng-click="selectPlan(3, 2)" ng-checked="isSelectedPlan(3)"><label for="r_3"><span></span></label></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_4" ng-click="selectPlan(4, 3)" ng-checked="isSelectedPlan(4)"><label for="r_4"><span></span></label></td>
+                             
+                         </tr>
+                     </tbody>
+                  </table>
+              </form>
+              
+              
+              
+              
+                <form action="" class="form-table" ng-show="selectedPeriod == 1">
+                  <table class="table-campaign" ng-class="{'valid_table':$root.campaing_periode_msg}">
+                    <thead>
+                     <tr>
+                         <th></th>
+                         <th style="background-color: #02616d;" class="first">starter</th>
+                         <th style="background-color: #025b6d;" class="second">advanced</th>
+                         <th style="background-color: #02526d;" class="third">expert</th>
+                         <th style="background-color: #024e6d;" class="fourth">VIP</th>
+                     </tr>                      
+                     <tr>
+                         <th></th>
+                         <th style="background-color: #106970;" class="first">£279</th>
+                         <th style="background-color: #02616d;" class="second">£459</th>
+                         <th style="background-color: #025b6d;" class="third">£839</th>
+                         <th style="background-color: #02526d;" class="fourth">£1,649</th>
+                         
+                     </tr> 
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td class="silver">Campaigns</td>
+                             <td class="ebebeb">3+</td>
+                             <td class="silver">3+</td>
+                             <td class="ebebeb">3+</td>
+                             <td class="silver">3+</td>
+                         </tr>
+                         <tr>
+                             <td class="grey">Ads shown</td>
+                             <td>40,000</td>
+                             <td class="grey">80,000</td>
+                             <td>160,000</td>
+                             <td class="grey">320,000</td>
+                         </tr>
+                         <tr>
+                             <td class="silver">Clicks</td>
+                             <td class="ebebeb">320</td>
+                             <td class="silver">640</td>
+                             <td class="ebebeb">1,280</td>
+                             <td class="silver">2,500</td>
+                         </tr>
+                         
+
+                         <tr>
+                             <td class="grey">Retargeting</td>
+                             <td class="im-bg"></td>
+                             <td class="grey im-bg"></td>
+                             <td class="im-bg"></td>
+                             <td class="grey im-bg"></td>
+                         </tr>
+                         <tr>
+                             <td class="silver">Landing page</td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="silver im-bg"></td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class='silver im-bg'></td>
+                         </tr>
+                         <tr>
+                             <td class="grey">Ad design</td>
+                             <td class="im-bg"></td>
+                             <td class="grey im-bg"></td>
+                             <td class="im-bg"></td>
+                             <td class="grey im-bg"></td>
+                         </tr>
+                         <tr>
+                             <td class="silver">Campaign guard</td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="silver im-bg"></td>
+                             <td class="ebebeb im-bg"></td>
+                             <td class="silver im-bg"></td>
+                         </tr>
+                         
+                         <tr>
+                         <th>Annual Saving</th>
+                         <th style="background-color: #106970; color:white;">£240</th>
+                         <th style="background-color: #02616d; color:white;">£480</th>
+                         <th style="background-color: #025b6d; color:white;">£720</th>
+                         <th style="background-color: #02526d; color:white;">£1,200</th>
+						</tr> 
+                         
+                         <tr>
+                             <td></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_5" ng-click="selectPlan(1, 0)" ng-checked="isSelectedPlan(1)"><label for="r_5"><span></span></label></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_6" ng-click="selectPlan(2, 1)" ng-checked="isSelectedPlan(2)"><label for="r_6"><span></span></label></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_7" ng-click="selectPlan(3, 2)" ng-checked="isSelectedPlan(3)"><label for="r_7"><span></span></label></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_8" ng-click="selectPlan(4, 3)" ng-checked="isSelectedPlan(4)"><label for="r_8"><span></span></label></td>
+                             
+                         </tr>
+                     </tbody>
+                  </table>
+              </form>
+              
+              
+              
+              
+              <form action="" class="form-table" ng-show="selectedPeriod == 2">
+                  <table class="table-campaign" ng-class="{'valid_table':$root.campaing_periode_msg}">
+                    <thead>
+                     <tr>
+                         <th></th>
+                         <th class="first">brand awareness</th>
+                         <th class="second" style="opacity: 0.5;">beacon</th>
+                         <th class="third" style="opacity: 0.5;">self-serve</th>
+                     </tr>                      
+                     <tr>
+                         <th></th>
+                         <th class="first">£149</th>
+                         <th class="second" style="opacity: 0.5;">£349</th>
+                         <th class="third" style="opacity: 0.5;">£99</th>
+                     </tr> 
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td class="silver">Ads shown</td>
+                             <td class="ebebeb">15,000</td>
+                             <td class="silver" style="opacity: 0.5;">40,000</td>
+                             <td class="ebebeb" style="opacity: 0.5;">12,500</td>
+                         </tr>
+                         <tr>
+                             <td class="grey">Clicks</td>
+                             <td>120</td>
+                             <td style="opacity: 0.5;" class="grey">320</td>
+                             <td style="opacity: 0.5;">100</td>
+                         </tr>
+                         <tr>
+                             <td class="silver">Retargeting</td>
+                             <td class="ebebeb im-bg"></td>
+                             <td style="opacity: 0.5;" class="silver im-bg"></td>
+                             <td style="opacity: 0.5;" class="ebebeb"></td>
+                         </tr>
+                         <tr>
+                             <td class="grey">Landing page</td>
+                             <td class="im-bg"></td>
+                             <td style="opacity: 0.5;" class="grey im-bg"></td>
+                             <td style="opacity: 0.5;"></td>
+                         </tr>
+                         <tr>
+                             <td class="silver">Ad design</td>
+                             <td class="ebebeb im-bg"></td>
+                             <td style="opacity: 0.5;" class="silver im-bg"></td>
+                             <td style="opacity: 0.5;" class="ebebeb"></td>
+                             
+                         </tr>
+                         <tr>
+                             <td class="grey">Campaign guard</td>
+                             <td></td>
+                             <td style="opacity: 0.5;" class="ebebeb im-bg"></td>
+                             <td style="opacity: 0.5;"></td>
+                         </tr>
+                         <tr>
+                             <td></td>
+                             <td><input type="radio" class="r_button" name="compaing-choise" id="r_9" ng-click="selectPlan(1, 0)" ng-checked="isSelectedPlan(1)"><label for="r_9"><span></span></label></td>
+                             <td style="font-weight: 600; color:#4dc01d">coming soon</td>
+                             <td style="font-weight: 600; color:#4dc01d">coming soon</td>
+                         </tr>
+                     </tbody>
+                  </table>
+              </form>
+
+
+
+
+
+
+             <div ng-show="selectedPeriod == 1" style="    display: flex; justify-content: center; margin: auto; margin-bottom: 15px;">
+                 <span>Campaign Length (Months) </span>
+                 <input type="range" class="month_range_input"  ng-model="input_range_month"  min="3" max="36">
+              </div>
+
+
+
+             <div ng-show="selectedPeriod == 0" class="period_description">
+                 <p >Selecting one of the above options will enable you to run a campaign for 2-4 weeks; perfect for increasing local awareness of your shop, services, event or to promote a limited time offer.</p>
+             </div>
+             <div ng-show="selectedPeriod == 1" class="period_description">
+                 <p>Our monthly subscription campaigns are designed to consistently help you achieve high levels of visibility within the local area. We can create a campaign based on all your local display advertisement needs – contact us for a personalised campaign.</p>
+                 <p>* A minimum of 3 campaigns can be run in all subscription campaigns</p>
+                 <p>£100 saving applies only to your first campaign subscription</p>
+             </div>
+             <div ng-show="selectedPeriod == 2" class="period_description">
+                 <p>Here are some other campaigns available through the seelocal platform, including our all new beacon campaign which allows you to accurately track footfall from your store. We also offer self-serve access to show ads on exclusive publishers within our network</p>
+             </div>
+
+
+         </div>
+         <div class="choose-time">
+            <div class="title-time title-wrap">Campaign Dates</div>
+            <div class="cont" ng-class="{'valid_table':$root.campaing_periode_date_msg}">
+                <div id="datepicker" class="calendar">                      
+                               </div>
+                <div id="datepicker-blue" class="calendar blue-picker">                      
+               </div>
+               <div class="note">
+					<p ng-show="selectedPeriod == 0" class="please">
+						Please note that you may only select dates 3 working days from now due to the process of setting up a campaign
+						<br>
+						Campaigns can last up to 4 weeks.
+					</p>
+					<p ng-show="selectedPeriod == 1" class="please">
+						Please note that you may only select dates 3 working days from now due to the process of setting up a campaign.
+					</p>
+					<p ng-show="selectedPeriod == 2" class="please">
+						Please note that you may only select dates 3 working days from now due to the process of setting up a campaign
+						<br>
+						Campaigns can last up to 4 weeks.
+					</p>
+                    <p class="start-date">Start date: <span id="start"></span></p>
+                    <p class="end-date" ng-hide="selectedPeriod == 1">End date: <span id="end"></span></p>
+
+               </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+<navigation-bottom></navigation-bottom>

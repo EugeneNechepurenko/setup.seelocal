@@ -1,0 +1,139 @@
+ <style>
+ /*------make full size------*/ 
+    main.container {
+        width: 100%;
+        max-width: none; 
+        background: url("../images/bg-log.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: calc(100% - 58px);
+    } 
+    footer {        
+        box-shadow: 0px 0px 35px 0px rgba(1, 1, 1, 0.75);
+    }
+     .send_pass_btn{
+         color: white;
+         background: #4dc01d;
+         border: 1px solid #44ac18;
+         outline: none;
+         -webkit-border-radius: 24px;
+         border-radius: 24px;
+         position: relative;
+         cursor: pointer;
+         margin: -10px;
+         padding: 5%;
+         font-size: .9em;
+         font-family: "LatoSemibold", sans-serif;
+         max-width: 170px;
+         width: 100%;
+         background: linear-gradient(to bottom, rgb(130, 211, 96) 20%, rgb(68, 172, 24) 80%);
+         text-align: center;
+     }
+     .send_pass_btn:hover{
+         color: white;
+     }
+
+ .container-log .main-login-block .log-form button:hover {
+     transform: translateY(3px);
+ }
+ .container-log .main-login-block .log-form button:active {
+     transform: translateY(5px);
+ }
+
+ </style>
+ <div class="container-log">
+     <div class="main-login-block">
+         <div class="logo-wrap">
+            <img src="../images/seelocal_logo_big_r.png" alt="seelocal_logo_big_r.png">
+         </div>
+         <h2>Create a truly local, online advertising campaign</h2>
+         <form role="form" class="log-form" method="POST" name="loginForm" ng-submit="login(user)" novalidate>
+             <div class="first-column">
+				<span ng-show="$root.login_error_msg == true && forgot == false" style="color: red;">Wrong email or password</span>
+                 <input ng-show="forgot == false" type="email" placeholder="Email" name="email" value="" autocomplete="off" ng-model="user.email" required>
+                 <input ng-show="forgot == false" type="password" placeholder="Password" name="password" autocomplete="off" ng-model="user.password" required>
+                 <a ng-show="forgot == false" href="#" class="forgot" ng-click="forgot=(forgot == true)?false:true">Forgot your password?</a>
+
+
+                 <span ng-show="email_forgot_fail == true && forgot == true" style="color: red;">Wrong email</span>
+                 <span ng-show="email_forgot_new == true && forgot == true" style="color: green;">Password was send to your email</span>
+                 <input ng-show="forgot == true" type="text" placeholder="Email" ng-model="email_forgot" >
+                 <a ng-show="forgot == true" href="#" class="forgot" ng-click="forgot=(forgot == true)?false:true">Back</a>
+             </div>
+             <div class="second-column">
+                <button ng-show="forgot == false" type="submit" class="login_button">Login</button>
+
+                <a class="send_pass_btn" ng-show="forgot == true" ng-click="send_mew_pass()">Send new password</a>
+             </div>
+         </form>
+
+
+
+         <!--<form role="form" class="log-form" method="POST" name="loginForm" ng-submit="login(user)" novalidate>-->
+             <!--<div class="first-column">-->
+				<!--<span  style="color: red;">Wrong email or password</span>-->
+                 <!--<input type="email" placeholder="Email" name="email" value="" autocomplete="off" ng-model="user.email" required>-->
+                 <!--<input  type="password" placeholder="Password" name="password" autocomplete="off" ng-model="user.password" required>-->
+             <!--</div>-->
+             <!--<div class="second-column">-->
+                <!--<button type="submit">Login</button>-->
+             <!--</div>-->
+         <!--</form>-->
+
+
+         <div class="cr-account">
+             <a href="/register">Not registered? Create an Account here</a>
+         </div>
+     </div>
+ </div>
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" name="loginForm" ng-submit="login(user)" novalidate>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" value="" ng-model="user.email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password" ng-model="user.password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display:none;">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember"> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-btn fa-sign-in"></i>Login
+                                </button>
+
+                                <a class="btn btn-link" href="/reset-password">Forgot Your Password?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  -->

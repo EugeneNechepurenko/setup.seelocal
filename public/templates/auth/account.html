@@ -1,0 +1,160 @@
+
+ <div class="container-account">
+ 	<div class="account-data">
+	 	<div class="title">Your Account</div>
+	 	<div class="client-id">Client ID: <span class="number"><%user_id%></span></div>
+	 </div>
+	 <div class="update">
+	 	Update your Account details and view invoices
+	 </div>
+
+	 <div class="table-data-account">
+	 	<div class="table1">
+	 		<div class="head">
+	 			<div class="account-details">Account details </div>
+	 			<input ng-show="user_pass_btn == true" type="text" style="width: 45%;height: 25px;">
+	 			<div class="ch-passw">
+		 			<a href="#" ng-click="user_pass_btn = true" ng-show="user_pass_btn == false">
+		 				Change password
+		 			</a>
+		 			<a href="#" ng-click="user_pass_btn = false; save_pass()" ng-show="user_pass_btn == true">
+		 				Save
+		 			</a>
+	 			</div>	 	
+	 		</div>
+	 		<div class="body-data">
+	 			<div class="row-data name-account">
+
+	 				<div class="account-details" ng-show="user_fl_name == false"><% user_f_name %></div>
+	 				<!-- <div class="account-details" ng-show="user_fl_name == false"><% user_f_name %> <%user_l_name%></div> -->
+	 				
+	 				<div class="account-details" ng-show="user_fl_name == true" style="width: 90%;">
+						<input type="text" ng-model="user_f_name" ng-value="user_f_name" style="width: 45%;    height: 25px;">
+						<!-- <input type="text" ng-model="user_l_name" ng-value="user_l_name" style="width: 45%;    height: 25px;"> -->
+	 				</div>
+	 				
+		 		    <div class="ch-passw">
+		 				<a href="#" ng-click="user_fl_name = true" ng-show="user_fl_name == false">
+		 					Edit
+		 				</a>
+		 				<a href="#" ng-click="user_fl_name = false; save_fl_name()" ng-show="user_fl_name == true">
+		 					Save
+		 				</a>
+		 			</div>
+	 			
+	 			
+	 			</div>
+	 			
+	 			
+	 			<div class="row-data email-account">
+		 			<div class="account-details" ng-show="user_email_btn == false"><%user_email%></div>
+		 			
+		 			
+		 			<div class="account-details" ng-show="user_email_btn == true" style="width: 90%;">
+						<input type="text" ng-model="user_email" ng-value="user_email" style="width: 90%;    height: 25px;">
+	 				</div>
+	 				
+		 			
+			 		<div class="ch-passw">
+		 				<a href="#" ng-click="user_email_btn = true" ng-show="user_email_btn == false">
+		 					Edit
+		 				</a>
+		 				<a href="#" ng-click="user_email_btn = false; save_email()" ng-show="user_email_btn == true">
+		 					Save
+		 				</a>
+			 		</div>
+			 		
+	 			</div>
+	 			
+	 			
+	 			
+	 			
+	 			<div class="row-data phone-account">
+		 			<div class="account-details" ng-show="user_phone_btn == false"><%user_phone%></div>
+		 			
+		 			<div class="account-details" ng-show="user_phone_btn == true" style="width: 90%;">
+						<input type="text" ng-model="user_phone" ng-value="user_phone" style="width: 90%;    height: 25px;">
+	 				</div>
+		 			
+			 		<div class="ch-passw">
+		 				<a href="#" ng-click="user_phone_btn = true" ng-show="user_phone_btn == false">
+		 					Edit
+		 				</a>
+		 				<a href="#" ng-click="user_phone_btn = false; save_phone()" ng-show="user_phone_btn == true">
+		 					Save
+		 				</a>
+			 		</div>
+			 	</div>
+			 	
+			 	
+			 	
+			 	<div class="row-data address-account">
+		 			<div class="account-details"  ng-show="user_address_btn == false">
+		 				<p><%user_street%></p>
+		 				<p><%user_region%></p>
+		 				<p><%user_city%></p>
+		 				<p><%user_zip%></p>
+		 			</div>
+		 			
+		 			
+		 			<div class="account-details" ng-show="user_address_btn == true" style="width: 90%;">
+		 				<input type="text" ng-model="user_street" ng-value="user_street" placeholder="Street" style="width: 90%;height: 25px;">
+		 				<input type="text" ng-model="user_region" ng-value="user_region" placeholder="State" style="width: 90%;height: 25px;">
+		 				<input type="text" ng-model="user_city" ng-value="user_city" placeholder="City" style="width: 90%;height: 25px;">
+		 				<input type="text" ng-model="user_zip" ng-value="user_zip" placeholder="Postcode" style="width: 90%;height: 25px;">
+		 			</div>
+		 			
+		 			
+			 		<div class="ch-passw">
+						<a href="#" ng-click="user_address_btn = true" ng-show="user_address_btn == false">
+		 					Edit
+		 				</a>
+		 				<a href="#" ng-click="user_address_btn = false; save_address()" ng-show="user_address_btn == true">
+		 					Save
+		 				</a>
+			 		</div>
+			 	</div>
+	 		</div>
+	 	</div>
+
+	 	<div class="table2">
+	 		<div class="head">
+	 			 Invoices	
+	 		</div>
+	 		<div class="body-data">
+	 		
+	 		<input type="text" name="jb_target" placeholder="Job Title Targeting" ng-repeat="jb_target_arr in jb_target_arr" ng-model="jb_target_arr.name">
+	 		
+	 		
+	 		
+	 		<div class="row-data" ng-repeat="invoice in invoice"><div class="inv"><%invoice.date%></div><div class="vprint"><a href="#">View</a>/<a href="#">Print</a></div></div>
+		 		
+		 		
+<!--		 		<div class="row-data">
+		 		<div class="row-data"> 
+		 			<div class="inv">28-03-16</div> 
+		 			<div class="vprint">
+			 			<a href="#">
+			 				View
+			 			</a>
+			 			/
+			 			<a href="#">
+			 				Print
+			 			</a>
+		 			</div>
+		 		</div>
+		 		<div class="row-data">-->
+		 		
+		 		<div class="view-more">
+			 			<a href="#" ng-click="add_invoices()">
+			 				view more
+			 			</a>
+		 			</div>
+		 		</div>
+		 	</div>
+		 </div> 
+	 </div>
+	 <div class="support-help">
+	 	Need help with your campaigns? <span class="call"> Call our support number on <a href="tel:01295817638">01295 817 638</a></span>
+	 </div>
+</div>

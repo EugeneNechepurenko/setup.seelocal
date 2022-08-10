@@ -1,0 +1,7 @@
+test
+ coupon = 'SeeLocalf33!' , user_id = '279' 
+ coupon = 'SeeLocalf33!' , user_id = '279' 
+ coupon = 'SeeLocalf33!' , user_id = '281' 
+ coupon = 'SeeLocalf33!' , user_id = '282' 
+ coupon = 'SeeLocalf33!' , user_id = '286' 
+ coupon = 'SeeLocalf33!' , user_id = '288' 
